@@ -83,6 +83,9 @@ docker run --name cont1 test.1
 Open Docker Desktop and verify whether the image `test.1` is created successfully.
 
 ---
+runthis coomand
+```docker images
+```
 
 ### Step 6: Copy Image Tag
 
