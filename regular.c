@@ -398,3 +398,77 @@ int main()
 
     return 0;
 }
+
+bear
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+// Function to check if all characters outside the window are balanced (<= n/4)
+int is_balanced(int count[], int target)
+{
+    if (count['A'] > target || count['C'] > target ||
+        count['G'] > target || count['T'] > target)
+    {
+        return 0; // Not balanced
+    }
+
+    return 1; // Balanced
+}
+
+int steadyGene(char* gene, int n)
+{
+    int count[256] = {0};
+
+    // Count frequency of each character
+    for (int i = 0; i < n; i++)
+    {
+        count[gene[i]]++;
+    }
+
+    int target = n / 4;
+    int min_len = n;
+    int left = 0;
+
+    // Sliding window: right pointer expands the window
+    for (int right = 0; right < n; right++)
+    {
+        count[gene[right]]--;
+
+        // Shrink window while balanced
+        while (left <= right && is_balanced(count, target))
+        {
+            if ((right - left + 1) < min_len)
+            {
+                min_len = right - left + 1;
+            }
+
+            count[gene[left]]++;
+            left++;
+        }
+    }
+
+    return min_len;
+}
+
+int main()
+{
+    int n;
+
+    // Read the gene length
+    if (scanf("%d", &n) != 1)
+        return 1;
+
+    char gene[n + 1];
+
+    // Read gene string
+    scanf("%s", gene);
+
+    int result = steadyGene(gene, n);
+
+    printf("%d\n", result);
+
+    return 0;
+}
+
